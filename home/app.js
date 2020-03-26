@@ -7,15 +7,26 @@ fetch("http://localhost:5000/notes") // Call the fetch function passing the url 
     }
     // Examine the text in the response
     response.json().then(function(notes) {
-        var note;
         for (note of notes) {
-            var para = document.createElement("p");
-            var quote = document.createTextNode(note['quote']);
-            document.createElement("br")
-            var comment = document.createTextNode(note['note']);
-            para.appendChild(quote);
-            para.appendChild(comment);
-            document.getElementById("content").appendChild(para);
+            var parent = document.getElementById("content")
+            var aNode = document.createElement("a")
+            aNode.href = note['url']
+            aNode.innerHTML = note['url']
+            parent.appendChild(aNode)
+
+            var div = document.createElement("div");
+            var headerEle = document.createElement("blockquote");
+            var quoteNode = document.createTextNode(note['quote']);
+            headerEle.appendChild(quoteNode)
+            div.appendChild(headerEle)
+
+            
+            var noteEle = document.createElement("p");
+            var noteNode = document.createTextNode(note['note']);
+            noteEle.appendChild(noteNode)
+            div.appendChild(noteEle)
+            
+            parent.appendChild(div)
         }
         });
   })
