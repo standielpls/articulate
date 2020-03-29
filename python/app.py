@@ -3,10 +3,10 @@ from pymongo import MongoClient
 import uuid
 import pprint
 
-client = MongoClient()
-db = client["notes"]
-col = db["notes"]
-pp = pprint.PrettyPrinter(indent=4)
+# client = MongoClient()
+# db = client["notes"]
+# col = db["notes"]
+# pp = pprint.PrettyPrinter(indent=4)
 
 app = Flask(__name__)
 
@@ -14,6 +14,11 @@ app = Flask(__name__)
 def hello():
     name = request.args.get("name", "World")
     return f'Hello, {escape(name)}!'
+
+@app.route('/version')
+def version():
+    name = request.args.get("name", "World")
+    return jsonify({"version": "1.0.0"})
 
 @app.route('/notes', methods=['GET', 'POST'])
 def postNotes():
@@ -43,3 +48,5 @@ def postNotes():
         return jsonify({"error": {"message": "unable to insert: {0}".format(e)}})
     return jsonify(success=True)
 
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)
