@@ -14,4 +14,4 @@ docker-build:
 	docker build . -t chrome-ext
 
 docker-run:
-	docker run -it --rm -p 5000:5000 --name chrome-ext chrome-ext
+	docker run -it --rm --name=chrome-ext -p 5000:5000 chrome-ext

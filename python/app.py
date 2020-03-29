@@ -17,7 +17,6 @@ def hello():
 
 @app.route('/version')
 def version():
-    name = request.args.get("name", "World")
     return jsonify({"version": "1.0.0"})
 
 @app.route('/notes', methods=['GET', 'POST'])

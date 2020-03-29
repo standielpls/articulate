@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # CMD is the command that runs when the Docker container is started.
-CMD flask run
+CMD flask run --host 0.0.0.0
 
 # Docker
 # 1. Builds the image.
