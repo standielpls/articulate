@@ -17,18 +17,16 @@
     "https://*/*",
     "activeTab"
   ],
-  "options_ui": {
-    "page": "options.html",
-    "open_in_tab": false
-  },
-  "content_scripts": [{
-    "matches": [
-      "http://*/*",
-      "https://*/*"
-    ],
+  "content_scripts": [
+    {
+      "matches": [
+       "http://*/*",
+       "https://*/*"
+      ],
       "all_frames": true,
-    //   "js": ["./scripts/contentscript.js"]
-  }],
+      "js": ["./scripts/contentscript.js"]
+    }
+  ],
   "browser_action": {
     "default_icon": {
       "19": "icons/head-16.png",

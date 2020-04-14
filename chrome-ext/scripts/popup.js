@@ -5,13 +5,13 @@ function apiAddNotes() {
   let quote = document.getElementById('output').textContent
   let note = document.getElementById('comments').value
   
-  fetch("http://localhost:5000/notes", {
+  fetch("https://us-central1-lancelot-274021.cloudfunctions.net/createNote", {
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({quote: quote, note: note, url: url, time: Date.now()})
+      body: JSON.stringify({comment: quote, article: note, url: url, time: Date.now()})
   }) // Call the fetch function passing the url of the API as a parameter
     .then(function() {
       console.log("hello")

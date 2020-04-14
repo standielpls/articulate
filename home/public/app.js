@@ -1,4 +1,4 @@
-fetch("http://localhost:5000/notes") // Call the fetch function passing the url of the API as a parameter
+fetch("https://us-central1-lancelot-274021.cloudfunctions.net/listNotesByUserID") // Call the fetch function passing the url of the API as a parameter
   .then(function(response) {
     console.log(response.status)
     if (response.status !== 200) {
@@ -6,7 +6,8 @@ fetch("http://localhost:5000/notes") // Call the fetch function passing the url 
       return;
     }
     // Examine the text in the response
-    response.json().then(function(notes) {
+    response.json().then(function(articles) {
+        notes = articles['articles']
         for (note of notes) {
             var parent = document.getElementById("content")
             var aNode = document.createElement("a")
@@ -16,13 +17,13 @@ fetch("http://localhost:5000/notes") // Call the fetch function passing the url 
 
             var div = document.createElement("div");
             var headerEle = document.createElement("blockquote");
-            var quoteNode = document.createTextNode(note['quote']);
+            var quoteNode = document.createTextNode(note['comment']);
             headerEle.appendChild(quoteNode)
             div.appendChild(headerEle)
 
             
             var noteEle = document.createElement("p");
-            var noteNode = document.createTextNode(note['note']);
+            var noteNode = document.createTextNode(note['article']);
             noteEle.appendChild(noteNode)
             div.appendChild(noteEle)
             
