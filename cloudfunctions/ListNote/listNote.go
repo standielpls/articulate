@@ -75,7 +75,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	ctx := context.Background()
-	articles, err := pg.ListByUserID(ctx, "abc")
+	articles, err := pg.ListByUserID(ctx, r.URL.Query().Get("user_id"))
 	if err != nil {
 		data := Response{
 			Message: err.Error(),
@@ -125,7 +125,8 @@ func (p *Postgres) ListByUserID(ctx context.Context, id string) ([]Article, erro
 	rows, err := p.db.QueryContext(ctx, `
 		SELECT url, article, comment, created_at, updated_at
 		FROM article
-	`)
+		WHERE user_id=$1
+	`, id)
 	if err != nil {
 		return nil, err
 	}

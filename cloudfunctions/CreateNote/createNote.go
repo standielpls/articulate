@@ -130,6 +130,10 @@ func (a *Article) isValid() error {
 		return errors.New("comment must be provided")
 	}
 
+	if a.UserID == "" {
+		return errors.New("user_id must be provided")
+	}
+
 	return nil
 }
 
@@ -149,6 +153,7 @@ type Article struct {
 	URL       string    `json:"url"`
 	Article   string    `json:"article"`
 	Comment   string    `json:"comment"`
+	UserID    string    `json:"user_id"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -163,10 +168,10 @@ func (p *Postgres) CreateNote(ctx context.Context, note Article) (string, error)
 	var id string
 	err := p.db.QueryRowContext(ctx, `
 		INSERT INTO article
-		(url, comment, article)
+		(url, comment, article, user_id)
 		VALUES
-		($1, $2, $3)
+		($1, $2, $3, $4)
 		RETURNING id
-	`, note.URL, note.Comment, note.Article).Scan(&id)
+	`, note.URL, note.Comment, note.Article, note.UserID).Scan(&id)
 	return id, err
 }
