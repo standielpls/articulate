@@ -52,7 +52,12 @@ document.addEventListener("DOMContentLoaded", function () {
       code: "window.getSelection().toString();"
     },
     function (selection) {
-      document.getElementById("output").textContent = selection[0];
+      if (!selection[0] || selection[0] === '') {
+        console.log('in here!');
+        document.getElementById("output").textContent = 'Highlight text for it to appear here!';
+      } else {
+        document.getElementById("output").textContent = selection[0];
+      }
     }
   );
 });
