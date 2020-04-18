@@ -126,6 +126,7 @@ func (p *Postgres) ListByUserID(ctx context.Context, id string) ([]Article, erro
 		SELECT url, article, comment, created_at, updated_at
 		FROM article
 		WHERE user_id=$1
+		ORDER BY updated_at DESC
 	`, id)
 	if err != nil {
 		return nil, err
