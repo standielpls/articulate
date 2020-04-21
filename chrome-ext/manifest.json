@@ -1,6 +1,6 @@
 {
   "name": "Articulate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "manifest_version": 2,
   "description": "A notes taking extension to keep track of all your notes when you browse through articles online.",
   "icons": {
