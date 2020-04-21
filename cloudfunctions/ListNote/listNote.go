@@ -10,21 +10,24 @@ import (
 	"sync"
 	"time"
 
+	"github.com/gomodule/redigo/redis"
 	_ "github.com/lib/pq"
 )
 
 var v variables
 
 type variables struct {
-	DBUser string
-	DBPass string
-	DBHost string
-	DBName string
+	DBUser    string
+	DBPass    string
+	DBHost    string
+	DBName    string
+	RedisAddr string
+	RedisPass string
 }
 
 var pg *Postgres
 
-func init() {
+func ok() {
 	dbUser := os.Getenv("DB_USER")
 	if dbUser == "" {
 		panic("DB_USER not provided")
@@ -45,6 +48,16 @@ func init() {
 		panic("DB_NAME not provided")
 	}
 	v.DBName = dbName
+	redisAddr := os.Getenv("REDIS_ADDR")
+	if redisAddr == "" {
+		panic("REDIS_ADDR not provided")
+	}
+	v.RedisAddr = redisAddr
+	redisPass := os.Getenv("REDIS_PASS")
+	if redisPass == "" {
+		panic("REDIS_PASS not provided")
+	}
+	v.RedisPass = redisPass
 
 	var once sync.Once
 	once.Do(func() {
@@ -144,4 +157,37 @@ func (p *Postgres) ListByUserID(ctx context.Context, id string) ([]Article, erro
 	}
 
 	return as, nil
+}
+
+type Redis struct {
+	con redis.Conn
+}
+
+func NewRedis(addr, pw string) (*Redis, error) {
+	conn, err := redis.Dial("tcp", addr+":6379", redis.DialPassword(pw))
+	if err != nil {
+		return nil, fmt.Errorf("unable to dial: %s", err.Error())
+	}
+	return &Redis{conn}, nil
+}
+func (r *Redis) GetNote(ctx context.Context, key string) ([]Article, error) {
+	res, err := redis.Bytes(r.con.Do("LRANGE", key, 0, -1))
+	if err != nil {
+		return nil, err
+	}
+
+	var a []Article
+	err = json.Unmarshal(res, &a)
+	return a, err
+}
+
+func (r *Redis) CreateNote(ctx context.Context, id string, a Article) error {
+	res, err := redis.Bytes(r.con.Do("SET", id, a))
+	if err != nil {
+		return nil, err
+	}
+
+	var a []Article
+	err = json.Unmarshal(res, &a)
+	return a, err
 }
