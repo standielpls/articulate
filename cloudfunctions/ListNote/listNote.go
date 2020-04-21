@@ -182,6 +182,7 @@ func (r *Redis) GetNote(ctx context.Context, key string) ([]Article, error) {
 }
 
 func (r *Redis) CreateNote(ctx context.Context, id string, a Article) error {
+
 	res, err := redis.Bytes(r.con.Do("SET", id, a))
 	if err != nil {
 		return nil, err
