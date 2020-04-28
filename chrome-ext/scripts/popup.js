@@ -36,28 +36,37 @@ function apiAddNotes() {
 
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    title = tabs[0].title;
-    url = tabs[0].url;
-    document.getElementById("app-name").textContent = title
-  });
 
-  document
-    .getElementById("fireAddNotes")
-    .addEventListener("click", apiAddNotes);
+// document.addEventListener("DOMContentLoaded", () => {
+//   // document.getElementById("fireAddNotes").addEventListener("click", apiAddNotes);
 
-  chrome.tabs.executeScript(
-    {
-      code: "window.getSelection().toString();"
-    },
-    function (selection) {
-      if (!selection[0] || selection[0] === '') {
-        console.log('in here!');
-        document.getElementById("output").textContent = 'Highlight text for it to appear here!';
-      } else {
-        document.getElementById("output").textContent = selection[0];
-      }
-    }
-  );
+//   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+//     const { url, title } = tabs[0];
+
+//     document.getElementById("app-name").textContent = title;
+//     // if (url.includes("youtube")) {
+//     //   n = document.createElement("a").setAttribute("href", `${url}?t=${timestamp}`)
+//     //   document.getElementById("output").appendChild(n)
+//     // } else {
+//       chrome.tabs.executeScript(
+//         {
+//           code: "window.getSelection().toString();"
+//         },
+//         function (selection) {
+//           if (!selection[0] || selection[0] === '') {
+//             document.getElementById("output").textContent = 'Highlight text for it to appear here!';
+//           } else {
+//             document.getElementById("output").textContent = selection[0];
+//           }
+//         }
+//       );
+//     // };
+//   });
+// });
+
+function doSomethingWithTimeStamp(domContent) {
+  console.log("this is my something with time stamp: ", domContent)
+}
+chrome.browserAction.onClicked.addListener(function (tab) {
+  chrome.tabs.sendMessage(tab.id, {text: 'report_back'}, doSomethingWithTimeStamp);
 });
