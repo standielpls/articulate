@@ -19,15 +19,7 @@
     "activeTab",
     "https://us-central1-lancelot-274021.cloudfunctions.net/"
   ],
-  "background": {
-    "persistent": false,
-    "scripts": ["scripts/popup.js"]
-  },
   "web_accessible_resources": [
     "styles/popup.css"
-  ],
-  "content_scripts": [{
-    "matches": ["*://*.youtube.com/*"],
-    "js": ["scripts/content.js"]
-  }]
+  ]
 }

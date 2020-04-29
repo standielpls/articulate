@@ -40,7 +40,7 @@ blockquote {
   quotes: "“" "”";
   line-height: 1.7;
 }
-blockquote:before {
+/* blockquote:before {
   content: open-quote;
   font-size: 4em;
   line-height: 0.1em;
@@ -53,7 +53,7 @@ blockquote::after {
   line-height: 0.1em;
   margin-left: 0.1em;
   vertical-align: -0.4em;
-}
+} */
 blockquote p {
   display: inline;
 }
@@ -102,4 +102,8 @@ header h1 {
 .hold-note p {
   font-size: 18px;
   margin: 0;
+}
+
+.hold-note img {
+  width: 100%;
 }
