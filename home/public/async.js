@@ -56,10 +56,26 @@ noteApp.displayArticles = (articles) => {
     for (note of articles) {
         const { url, article, comment } = note;
 
-        // create <blockquote>:
-        const headerEle = document.createElement("blockquote");
-        const quoteNode = document.createTextNode(comment);
-        headerEle.appendChild(quoteNode)
+
+        let headerEle;
+        if (url.includes("youtube")) {
+            
+            headerEle = document.createElement("a");
+            const imgEle = new Image();
+            headerEle.appendChild(imgEle)
+            headerEle.href = url;
+
+            const newUrl = new URL(url);
+            const urlParams = new URLSearchParams(newUrl.search);
+            const ytId = urlParams.get('v');
+            const thumbnail = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`
+            imgEle.src = thumbnail;
+        } else {
+            // create <blockquote>:
+            headerEle = document.createElement("blockquote");
+            const quoteNode = document.createTextNode(comment);
+            headerEle.appendChild(quoteNode)
+        }
 
         // create <p>:
         const noteEle = document.createElement("p");
