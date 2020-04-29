@@ -101,6 +101,10 @@ a.popup {
   transition: all 0.3s ease-out;
 }
 
+iframe {
+  width: 100%;
+}
+
 svg {
   fill: white;
 }

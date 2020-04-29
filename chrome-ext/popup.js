@@ -45,10 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("app-name").textContent = tabTitle;
 
-    const urlParams = new URLSearchParams(url);
+    const newUrl = new URL(url);
+    const urlParams = new URLSearchParams(newUrl.search);
     const ytId = urlParams.get('v');
-    const thumbnail = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`
-
+    // const thumbnail = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`
+    const embed = `https://www.youtube.com/embed/${ytId}`
 
     if (url && url.includes("youtube")) {
       chrome.tabs.executeScript(tab.id,
@@ -58,10 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
         function (data) {
           const sec = Math.floor(data[0]);
           url = `${url}&t=${sec}`;
-          var yt = document.createElement("a");
+          var yt = document.createElement("iframe");
           var linkText = document.createTextNode(url);
           yt.appendChild(linkText)
-          yt.setAttribute("href", url)
+          yt.setAttribute("src", embed+`?t=${sec}`)
           yt.classList.add("popup");
           document.getElementById("output").hidden = true;
           document.getElementById("video-link").appendChild(yt);
