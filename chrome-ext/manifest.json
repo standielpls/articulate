@@ -13,13 +13,11 @@
       "38": "icons/head-32.png"
     },
     "default_title": "Notes Taking Ext",
-    "default_popup": "popup.html"
+    "default_popup": "index.html"
   },
   "permissions": [
     "activeTab",
     "https://us-central1-lancelot-274021.cloudfunctions.net/"
   ],
-  "web_accessible_resources": [
-    "styles/popup.css"
-  ]
+  "web_accessible_resources": ["styles/main.css"]
 }

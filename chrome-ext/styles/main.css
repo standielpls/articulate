@@ -7,18 +7,17 @@
 }
 
 :root {
-  --maroon: #865D79;
-  --pink: #E16F7C;
+  --maroon: #865d79;
+  --pink: #e16f7c;
 }
-
 
 #app {
   width: 500px;
 }
 
 body {
-  background: var(--maroon); 
-  font-family: 'Lato', sans-serif; 
+  background: var(--maroon);
+  font-family: "Lato", sans-serif;
 }
 
 nav {
@@ -61,9 +60,6 @@ blockquote:after {
   line-height: 0.1em;
   vertical-align: -0.4em;
 } */
-blockquote p {
-  display: inline;
-}
 
 textarea {
   box-sizing: border-box;
@@ -78,7 +74,7 @@ textarea {
   border-radius: 3px;
   line-height: 2em;
   border: none;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 h2 {
@@ -95,26 +91,21 @@ a {
   transition: all 0.3s ease-out;
 }
 
-a.popup {
-  font-size: 1.2em;
-  color: black;
-  transition: all 0.3s ease-out;
-}
-
 svg {
   fill: white;
 }
 
-a:hover svg{
+a:hover svg {
   fill: var(--pink);
 }
 
 .hold-note {
-  background: #D9DAD7;
+  background: #d9dad7;
   padding: 10px;
   border-radius: 5px;
   margin-top: 5px;
 }
+
 footer {
   margin-top: 10px;
   margin-bottom: 20px;
@@ -132,5 +123,20 @@ button {
 }
 
 button:hover {
-  background: #8D3C61;
+  background: #8d3c61;
+}
+
+#output {
+  background: #d9dad7;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+#output-video-link {
+  visibility: hidden;
+}
+
+#output-video {
+  max-width: 100%;
 }

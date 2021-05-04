@@ -6,9 +6,7 @@ location.
 
 [Link to Chrome Extension](https://chrome.google.com/webstore/detail/articulate/pocgabdmjogcjmbnkpnikejbaelfdjpc)
 
-## TODO 
+## TODO
 
-1. Add dark mode support
-2. Popup button like Medium
-3. Build viewing feed
-4. Productionize it!
+1. Add SSO
+2. Productionize backend
