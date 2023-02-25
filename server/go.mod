@@ -8,5 +8,5 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/lib/pq v1.6.0
 	github.com/ryanfowler/uuid v1.1.1
-	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b // indirect
+	golang.org/x/net v0.7.0 // indirect
 )
